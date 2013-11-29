@@ -38,11 +38,11 @@ public class Cluster {
 		if(avg != null) {avgString = avg.toString();}
 		
 		result += "Avg: " + avgString + "\n";
-		
+		/*
 		for(int d = 0; d < dataset.size(); d++) {
 			result += d + ": " + dataset.get(d).toString() + "\n";
 		}
-		
+		*/
 		return result;
 	}
 	
