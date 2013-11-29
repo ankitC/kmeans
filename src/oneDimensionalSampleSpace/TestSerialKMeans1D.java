@@ -1,6 +1,7 @@
 package oneDimensionalSampleSpace;
 
 import interfaces4KMeans.DataPoint;
+import interfaces4KMeans.KMeansTestInterface;
 
 import java.util.ArrayList;
 
@@ -8,19 +9,25 @@ import dataGenerators.OneDimensionalDataGenerator;
 
 import KMeans.SerialKMeans;
 
-public class TestSerialKMeans1D {
+public class TestSerialKMeans1D implements KMeansTestInterface {
 
-	public static void testSerial() throws Throwable {
-		ArrayList<DataPoint> data = new ArrayList<DataPoint>();
-	
-		data = OneDimensionalDataGenerator.generateInt(10000);
+	private int sampleLength = 1000;
+
+	public ArrayList<DataPoint> generateData(int sampleLength) {
+		return OneDimensionalDataGenerator.generateInt(sampleLength);
+	}
+
+	public void test() throws Throwable {
+
+		ArrayList <DataPoint>data =generateData(this.sampleLength);
 		System.out.println("Finished Generating Data");
-		SerialKMeans k = new SerialKMeans(data, Average1D.class, 5, 0.00001);
-		System.out.println(k.toString());
+		SerialKMeans kMeansResults = new SerialKMeans(data, Average1D.class, 5, 0.00001);
+		System.out.println(kMeansResults.toString());
+	
 	}
 
 	public static void main(String[] args) throws Throwable {
-		testSerial();
+		TestSerialKMeans1D oneDimenstionaTest = new TestSerialKMeans1D();
+		oneDimenstionaTest.test();
 	}
-
 }

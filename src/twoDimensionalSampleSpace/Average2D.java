@@ -1,7 +1,11 @@
 package twoDimensionalSampleSpace;
 
-public class Average2D {
+import interfaces4KMeans.Average;
+import interfaces4KMeans.DataPoint;
 
+public class Average2D implements Average{
+
+	private static final long serialVersionUID = 5560469128309610569L;
 	private int xTotal;
 	private int yTotal;
 	private int size;
@@ -20,9 +24,9 @@ public class Average2D {
 		return new DataPoint2D(xTotal/size, yTotal/size);
 	}
 
-	public void addDataPoint(DataPoint2D data) {
-		xTotal += data.getX();
-		yTotal += data.getY();
+	public void addDataPoint(DataPoint data) {
+		xTotal += ((DataPoint2D) data).getX();
+		yTotal += ((DataPoint2D) data).getY();
 		size++;
 	}
 

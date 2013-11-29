@@ -1,6 +1,10 @@
 package twoDimensionalSampleSpace;
 
-public class DataPoint2D {
+import interfaces4KMeans.DataPoint;
+
+public class DataPoint2D implements DataPoint {
+
+	private static final long serialVersionUID = 4998490492971266389L;
 	private int x;
 	private int y;
 
@@ -17,13 +21,13 @@ public class DataPoint2D {
 		return this.y;
 	}
 	
-	public double distanceTo(DataPoint2D d) {
-		double distance = (double) Math.sqrt(Math.pow(this.x -  d.getX(), 2) + Math.pow(this.y - d.getY(), 2));
-		return  distance;
-	}
-	
 	public String toString() {
 		return "("+this.x + ", " +this. y+")";
+	}
+
+	public double distanceTo(DataPoint dataPoint) {
+		double distance = (double) Math.sqrt(Math.pow(this.x -  ((DataPoint2D) dataPoint).getX(), 2) + Math.pow(this.y - ((DataPoint2D) dataPoint).getY(), 2));
+		return  distance;
 	}
 	
 }
