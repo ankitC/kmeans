@@ -6,8 +6,9 @@ import interfaces4KMeans.DataPoint;
 
 public class Average1D implements Average{
 
-	int total;
-	int size;
+	private static final long serialVersionUID = 8646046901376884325L;
+	private int total;
+	private int size;
 
 	public Average1D() {
 		this.total = 0;
