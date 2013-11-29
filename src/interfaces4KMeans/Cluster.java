@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public interface Cluster extends Serializable {
-	 ArrayList<DataPoint> dataset = null;
+	
+	ArrayList<DataPoint> dataset = null;
 	 DataPoint centroid = null;
 	 Average runningAvg = null;
 	 
