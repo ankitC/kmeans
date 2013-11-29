@@ -2,8 +2,6 @@ package KMeans;
 
 import interfaces4KMeans.Average;
 import interfaces4KMeans.DataPoint;
-
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -11,41 +9,41 @@ public class SerialKMeans {
 
 	private ArrayList<DataPoint> dataset;
 	private ArrayList<KMeansCluster> clusters;
-	private ArrayList<Double> centroidEpsilons;
-	private Class<?> kAvgClass;
-	private int ctr;
+	private ArrayList<Double> meanCentroidDeviation;	
+	private Class<?> avgerageImplementation;
+	private int iterations;
 
-	public SerialKMeans(ArrayList<DataPoint> dataset,	  Class<?> kAvgClass, int numborOfClasses, double tolerance) throws Exception {
+	public SerialKMeans(ArrayList<DataPoint> dataset,	  Class<?> sampleAvgerageClass, int numberOfClasses, double tolerance) throws Exception {
 		super();
-
 		this.dataset = dataset;
-		this.kAvgClass = kAvgClass;
+		this.avgerageImplementation = sampleAvgerageClass;
 
-		if(numborOfClasses<= 0) {
-			System.out.println("KMeansMaster: Number of classes  must be greater than 0.");
+		if(numberOfClasses<= 0) {
+			System.out.println("Cannot have " +numberOfClasses +" classes, min : 1");
 		}
 
-		this.kAvgClass = kAvgClass;
+		this.avgerageImplementation = sampleAvgerageClass;
 
 		this.clusters = new ArrayList<KMeansCluster>();
-		this.centroidEpsilons = new ArrayList<Double>();
+		this.meanCentroidDeviation = new ArrayList<Double>();
 
 		Random rgenerator = new Random();
 
-		for(int i = 0; i < numborOfClasses; i++) {
+		for(int i = 0; i < numberOfClasses; i++) {
 			DataPoint centroid = dataset.get(rgenerator.nextInt(dataset.size()));
-			KMeansCluster cluster = new KMeansCluster((DataPoint) centroid,  (Average)kAvgClass.getConstructor().newInstance());
+			KMeansCluster cluster = new KMeansCluster((DataPoint) centroid,  (Average)sampleAvgerageClass.getConstructor().newInstance());
 			this.clusters.add(cluster);
 		}
 
 		/* Initial Clustering */
 		this.clusterDataset();
 
-		this.ctr = 0;
-		while(!this.withinRange(tolerance)) {
+		this.iterations = 0;
+
+		while(!this.isInTolerenceLimits(tolerance)) {
 			this.findNewClusters();
 			this.clusterDataset();
-			this.ctr++;
+			this.iterations++;
 		}
 
 	}
@@ -61,10 +59,12 @@ public class SerialKMeans {
 
 	/* Finding the cluster which is closest to the given point */
 	private KMeansCluster findClosestCluster(DataPoint dataPt) {
+
 		KMeansCluster closestCluster = clusters.get(0);
 		double minDist = dataPt.distanceTo(closestCluster.getCentroid());
-		for(int c = 0; c < clusters.size(); c++) {
-			KMeansCluster cluster = clusters.get(c);
+
+		for(int i = 0; i < clusters.size(); i++) {
+			KMeansCluster cluster = clusters.get(i);
 			double distance = dataPt.distanceTo(cluster.getCentroid());
 			if(minDist > distance) {
 				minDist = distance;
@@ -75,38 +75,37 @@ public class SerialKMeans {
 	}
 
 
-	public void findNewClusters() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException{
+	public void findNewClusters() throws Exception{
 		ArrayList<KMeansCluster> newClusters = new ArrayList<KMeansCluster>();
-		centroidEpsilons = new ArrayList<Double>();
+		meanCentroidDeviation = new ArrayList<Double>();
 
 		for(int c = 0; c < clusters.size(); c++) {
-			// TODO: catch reflections errors and throw a better exception
+
 			KMeansCluster cluster = clusters.get(c);
 			DataPoint avg = cluster.getAverage();
 
-			// empty sets will have a null avg
-
 			if(avg != null) {
-				centroidEpsilons.add(avg.distanceTo(cluster.getCentroid()));
-				Average newAverager = (Average) kAvgClass.getConstructor().newInstance();
-				newClusters.add(new KMeansCluster(avg, newAverager));
+				meanCentroidDeviation.add(avg.distanceTo(cluster.getCentroid()));
+				Average newAverage = (Average) avgerageImplementation.getConstructor().newInstance();
+				newClusters.add(new KMeansCluster(avg, newAverage));
 			}
 		}
 		clusters = newClusters;
 	}
 
-	private boolean withinRange(double tolerance) {
+	private boolean isInTolerenceLimits(double tolerance) {
 
-		for(int i = 0; i < centroidEpsilons.size(); i++) {
-			if(centroidEpsilons.get(i) > tolerance) {
+		for(int i = 0; i < meanCentroidDeviation.size(); i++) {
+			if(meanCentroidDeviation.get(i) > tolerance) {
 				return false;
 			}
 		}
-		return centroidEpsilons.size() == clusters.size();
+		
+		return meanCentroidDeviation.size() == clusters.size();
 	}
 
 	public String toString() {
-		String result = "Created " + clusters.size() + " clusters in " + ctr + " iterations...\n";
+		String result = "Created " + clusters.size() + " clusters in " + iterations + " iterations...\n";
 		for(int c = 0; c < clusters.size(); c++) {
 			result += "Cluster: " + c + "\n" + clusters.get(c).toString();
 			result += "------------------\n";
