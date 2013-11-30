@@ -4,6 +4,6 @@ import java.io.Serializable;
 
 public interface Average extends Serializable {
 
-	public void addDataPoint(DataPoint dataPt);
+	public void addDataPoint(DataPoint dataPoint);
 	public DataPoint getAverage();
 }
