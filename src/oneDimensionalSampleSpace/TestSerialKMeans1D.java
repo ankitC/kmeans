@@ -27,7 +27,7 @@ public class TestSerialKMeans1D implements KMeansTestInterface {
 	}
 
 	public static void main(String[] args) throws Throwable {
-		TestSerialKMeans1D oneDimenstionaTest = new TestSerialKMeans1D();
-		oneDimenstionaTest.test();
+		TestSerialKMeans1D oneDimenstionalTest = new TestSerialKMeans1D();
+		oneDimenstionalTest.test();
 	}
 }
