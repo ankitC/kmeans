@@ -39,7 +39,7 @@ public class KMeansCluster implements Cluster {
 
 	public String toString() {
 		String result = "Centered around: " + centroid.toString() + "\n";
-
+		result+="Cluster Size:"+dataset.size()+"\n";
 		DataPoint  avg =(DataPoint) clusterAvg.getAverage();
 		String avgString = "null";
 		if(avg != null) {avgString = avg.toString();}
