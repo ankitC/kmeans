@@ -15,17 +15,20 @@ public class DNADataGenerator {
 
 	public static ArrayList<DataPoint> generateDNA(int numberOfStrands, int elementsPerStrand){
 
-		String[] dnaStrand = new String[elementsPerStrand];
 		ArrayList<DataPoint> returnCollection = new ArrayList<DataPoint>();
-		
+
 		for(int i=0; i< numberOfStrands; i++){
+			String[] dnaStrand = new String[elementsPerStrand];
 			for(int j=0; j<elementsPerStrand; j++){
 				String prop = element[Math.abs(random.nextInt())%4];
 				dnaStrand[j] = prop;
 			}
-			returnCollection.add(new DataPointDNA(dnaStrand));
+
+			DataPointDNA temp = new DataPointDNA(dnaStrand);
+		//	System.out.println(temp.toString());
+			returnCollection.add(temp);
 		}
-		
+
 
 		return returnCollection;
 	}
