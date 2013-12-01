@@ -23,7 +23,6 @@ public class Average1D implements Average{
 	}
 
 	public void addDataPoint(DataPoint dataPt) {
-		// TODO Auto-generated method stub
 		total +=   ((DataPoint1D) dataPt).getData();
 		size++;
 	}
