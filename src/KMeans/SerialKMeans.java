@@ -14,12 +14,13 @@ public class SerialKMeans {
 	private int iterations;
 
 	public SerialKMeans(ArrayList<DataPoint> dataset,	  Class<?> sampleAvgerageClass, int numberOfClasses, double tolerance) throws Exception {
-		super();
+
 		this.dataset = dataset;
 		this.avgerageImplementation = sampleAvgerageClass;
 
 		if(numberOfClasses<= 0) {
 			System.out.println("Cannot have " +numberOfClasses +" classes, min : 1");
+			System.exit(1);
 		}
 
 		this.avgerageImplementation = sampleAvgerageClass;
@@ -51,21 +52,22 @@ public class SerialKMeans {
 	/* Iterate through the points and find the clusters */
 	private void clusterDataset() {
 		for(int d = 0; d < dataset.size(); d++) {
-			DataPoint dataPt = dataset.get(d);
-			KMeansCluster closestCluster = findClosestCluster(dataPt);
-			closestCluster.addDataPoint(dataPt);
+			DataPoint dataPoint = dataset.get(d);
+			KMeansCluster closestCluster = findClosestCluster(dataPoint);
+			closestCluster.addDataPoint(dataPoint);
 		}
 	}
 
 	/* Finding the cluster which is closest to the given point */
-	private KMeansCluster findClosestCluster(DataPoint dataPt) {
+	private KMeansCluster findClosestCluster(DataPoint dataPoint) {
 
 		KMeansCluster closestCluster = clusters.get(0);
-		double minDist = dataPt.distanceTo(closestCluster.getCentroid());
+		double minDist = dataPoint.distanceTo(closestCluster.getCentroid());
 
 		for(int i = 0; i < clusters.size(); i++) {
 			KMeansCluster cluster = clusters.get(i);
-			double distance = dataPt.distanceTo(cluster.getCentroid());
+		
+			double distance = dataPoint.distanceTo(cluster.getCentroid());
 			if(minDist > distance) {
 				minDist = distance;
 				closestCluster = cluster;
@@ -93,6 +95,7 @@ public class SerialKMeans {
 		clusters = newClusters;
 	}
 
+	/* Check if the clustering is within the tolerance limits */
 	private boolean isInTolerenceLimits(double tolerance) {
 
 		for(int i = 0; i < meanCentroidDeviation.size(); i++) {
@@ -100,18 +103,18 @@ public class SerialKMeans {
 				return false;
 			}
 		}
-		
 		return meanCentroidDeviation.size() == clusters.size();
 	}
 
+	/* Print information about the cluster */
 	public String toString() {
 		String result = "Created " + clusters.size() + " clusters in " + iterations + " iterations...\n";
 		for(int c = 0; c < clusters.size(); c++) {
 			result += "Cluster: " + c + "\n" + clusters.get(c).toString();
 			result += "------------------\n";
 		}
-
 		return result;
 	}
+
 }
 
