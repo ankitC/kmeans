@@ -8,7 +8,6 @@ public class DataPointDNA implements DataPoint {
 	private String[] datapoint;
 
 	public DataPointDNA(String[] datapoint) {
-		super();
 		this.datapoint = datapoint;
 	}
 
@@ -32,8 +31,11 @@ public class DataPointDNA implements DataPoint {
 
 		for(int i = 0; i < stream1.length; i++){
 			if(!stream1[i].equalsIgnoreCase(stream2[i]))
-				difference ++;
+				difference=(float) (difference +1.0);
 		}
+	//	System.out.println("A:"+this.toString());
+	//	System.out.println("B:"+dataPoint.toString());
+	//	System.out.println("Difference:"+difference);
 		return difference;
 	}
 
