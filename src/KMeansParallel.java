@@ -28,6 +28,7 @@ public class KMeansParallel {
 				System.out.println("Started slave " + rank);
 				KMeansMPISlave mpiNode= new KMeansMPISlave(rank, masterRank, procs);
 				mpiNode.startListening();
+				mpiNode.toString();
 			}
 
 			MPI.Finalize();
