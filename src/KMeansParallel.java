@@ -23,13 +23,13 @@ public class KMeansParallel {
 
 				data = DNADataGenerator.generateDNA(1000, 30);
 				KMeansMPIMaster mpiNode = new KMeansMPIMaster(data,  DNASampleSpace.AverageDNA.class, 10, 0, masterRank, procs);
-				mpiNode.toString();
+				System.out.println(mpiNode.toString());
 			} else {
 				System.out.println("Started slave " + rank);
 				KMeansMPISlave mpiNode= new KMeansMPISlave(rank, masterRank, procs);
 				mpiNode.startListening();
-				System.out.println("Results on Slave");
-				mpiNode.toString();
+			//	System.out.println("Results on Slave");
+			//	mpiNode.toString();
 			}
 
 			MPI.Finalize();
