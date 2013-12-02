@@ -21,8 +21,8 @@ public class KMeansParallel {
 				System.out.println("Initializing Master");
 				ArrayList<DataPoint> data = new ArrayList<DataPoint>();
 
-				data = DNADataGenerator.generateDNA(10000, 30);
-				KMeansMPIMaster mpiNode = new KMeansMPIMaster(data,  DNASampleSpace.AverageDNA.class, 100, 0, masterRank, procs);
+				data = DNADataGenerator.generateDNA(1000, 30);
+				KMeansMPIMaster mpiNode = new KMeansMPIMaster(data,  DNASampleSpace.AverageDNA.class, 10, 0, masterRank, procs);
 				mpiNode.toString();
 			} else {
 				System.out.println("Started slave " + rank);
