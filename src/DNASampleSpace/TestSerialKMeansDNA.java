@@ -2,7 +2,7 @@ package DNASampleSpace;
 
 import java.util.ArrayList;
 
-import KMeans.SerialKMeans;
+import KMeans.Serial.SerialKMeans;
 
 import dataGenerators.DNADataGenerator;
 

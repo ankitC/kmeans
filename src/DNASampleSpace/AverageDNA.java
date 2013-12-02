@@ -25,9 +25,9 @@ public class AverageDNA implements Average {
 		String[] datapoint = ((DataPointDNA)dataPt).getDatapoint();
 
 		if(datasize < 0){		
-		//	System.out.println("DataPoint Length:"+ datapoint.length);
+			//	System.out.println("DataPoint Length:"+ datapoint.length);
 			this.datasize = datapoint.length;
-			
+
 			ACount = new int[datasize];
 			CCount = new int[datasize];
 			GCount = new int[datasize];
@@ -50,9 +50,9 @@ public class AverageDNA implements Average {
 				System.exit(1);
 			}
 		}
-	//	System.out.println("Datapoint:" +dataPt.toString());
-	//	System.out.println("ACount:"+ACount.length+"CCount:"+CCount.length+"GCount:"+GCount.length+"TCount:"+TCount.length);
-		
+		//	System.out.println("Datapoint:" +dataPt.toString());
+		//	System.out.println("ACount:"+ACount.length+"CCount:"+CCount.length+"GCount:"+GCount.length+"TCount:"+TCount.length);
+
 	}
 
 	public DataPoint getAverage() {
@@ -86,5 +86,39 @@ public class AverageDNA implements Average {
 		}
 		DataPointDNA returnResult = new DataPointDNA(result);
 		return returnResult;
+	}
+
+	public void combineAverages(Average average) {
+
+		AverageDNA childAverage = (AverageDNA)average;
+		for(int i = 0; i < datasize; i++){
+			ACount[i] += childAverage.getCount("A")[i];
+			CCount[i] += childAverage.getCount("C")[i];
+			GCount[i] += childAverage.getCount("G")[i];
+			TCount[i] += childAverage.getCount("T")[i];
+		}
+		this.datasize +=  ((AverageDNA) average).getDatasize();
+	}
+
+	public int getDatasize() {
+		return datasize;
+	}
+
+	public void setDatasize(int datasize) {
+		this.datasize = datasize;
+	}
+
+	public int[] getCount(String base){
+		if(base.equals("A")){
+			return ACount;
+		} else if(base.equals("C")){
+			return CCount;
+		} else if(base.equals("G")){
+			return GCount;
+		} else if(base.equals("T")){
+			return TCount; 
+		} else {
+			return null;
+		}
 	}
 }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import dataGenerators.OneDimensionalDataGenerator;
 
-import KMeans.SerialKMeans;
+import KMeans.Serial.SerialKMeans;
 
 public class TestSerialKMeans1D implements KMeansTestInterface {
 

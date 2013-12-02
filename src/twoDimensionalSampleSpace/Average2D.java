@@ -41,4 +41,11 @@ public class Average2D implements Average{
 	public int getTotalY(){
 		return yTotal;
 	}
+
+	public void combineAverages(Average average) {
+			this.xTotal += ((Average2D) average).getTotalX();
+			this.yTotal += ((Average2D) average).getTotalY();
+			this.size +=((Average2D) average).getSize();
+
+	}
 }

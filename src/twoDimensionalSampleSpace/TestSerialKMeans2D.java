@@ -3,7 +3,8 @@ package twoDimensionalSampleSpace;
 import interfaces4KMeans.DataPoint;
 import interfaces4KMeans.KMeansTestInterface;
 import java.util.ArrayList;
-import KMeans.SerialKMeans;
+
+import KMeans.Serial.SerialKMeans;
 import dataGenerators.TwoDimensionalDataGenerator;
 
 public class TestSerialKMeans2D implements KMeansTestInterface {
