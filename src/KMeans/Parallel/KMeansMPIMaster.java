@@ -61,6 +61,8 @@ public class KMeansMPIMaster {
 		}
 		
 		killSlaves();
+		System.out.println("Printing results...");
+		this.toString();
 	}
 	
 	private void killSlaves() throws Exception {
