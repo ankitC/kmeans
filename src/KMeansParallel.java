@@ -1,7 +1,7 @@
 import interfaces4KMeans.DataPoint;
 
 import java.util.ArrayList;
-
+import mpi.*;
 import KMeans.Parallel.KMeansMPIMaster;
 import KMeans.Parallel.KMeansMPISlave;
 

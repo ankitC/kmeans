@@ -1,7 +1,7 @@
 package KMeans.Parallel;
 
 import interfaces4KMeans.DataPoint;
-
+import mpi.*;
 import java.util.ArrayList;
 
 import KMeans.KMeansCluster;
