@@ -36,6 +36,10 @@ public class KMeansCluster implements Cluster {
 	public DataPoint getAverage() {
 		return (DataPoint) clusterAvg.getAverage();
 	}
+	
+	public Average getClusterAverage(){
+		return this.clusterAvg;
+	}
 
 	public String toString() {
 		String result = "Centered around: " + centroid.toString() + "\n";
@@ -51,6 +55,11 @@ public class KMeansCluster implements Cluster {
 		}
 		 */
 		return result;
+	}
+
+	public void mergeWith(KMeansCluster kMeansCluster) {
+		
+		
 	}
 
 }
