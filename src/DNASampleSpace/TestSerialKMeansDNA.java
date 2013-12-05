@@ -21,7 +21,7 @@ public class TestSerialKMeansDNA implements KMeansTestInterface{
 	public void test() throws Throwable {
 
 		ArrayList <DataPoint>data =generateData(this.sampleLength);
-		System.out.println("Finished Generating Data");
+//		System.out.println("Finished Generating Data");
 		//	System.out.println(data.size());
 
 		//for(int i = 0; i< data.size(); i++)

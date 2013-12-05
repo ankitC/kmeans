@@ -55,14 +55,14 @@ public class KMeansMPIMaster {
 
 		while(!this.withinRange(centroidEpsilon)) {
 			this.ctr++;
-			System.out.println("Running iteration " + this.ctr + "...");
+		//	System.out.println("Running iteration " + this.ctr + "...");
 			this.findNewClusters();
 			this.clusterDataset();
 		}
 
 		killSlaves();
-		System.out.println("Printing results...");
-		this.toString();
+		//System.out.println("Printing results...");
+		//System.out.println(this.toString());
 	}
 
 	private void killSlaves() throws Exception {
