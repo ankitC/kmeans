@@ -12,6 +12,7 @@ import dataGenerators.DNADataGenerator;
 public class TestParallelKMeansDNA {
 
 	public static void main(String[] args) throws Throwable {
+		long time1 = System.currentTimeMillis();
 		try {
 			MPI.Init(args);
 			int rank = MPI.COMM_WORLD.Rank();
@@ -19,14 +20,14 @@ public class TestParallelKMeansDNA {
 			int masterRank = 0;
 
 			if(rank == masterRank) {
-				System.out.println("Initializing Master");
+			//	System.out.println("Initializing Master");
 				ArrayList<DataPoint> data = new ArrayList<DataPoint>();
 
-				data = DNADataGenerator.generateDNA(1000, 30);
+				data = DNADataGenerator.generateDNA(1000000, 10);
 				KMeansMPIMaster mpiNode = new KMeansMPIMaster(data,  DNASampleSpace.AverageDNA.class, 10, 0, masterRank, procs);
 	//			System.out.println(mpiNode.toString());
 			} else {
-				System.out.println("Started slave " + rank);
+	//			System.out.println("Started slave " + rank);
 				KMeansMPISlave mpiNode= new KMeansMPISlave(rank, masterRank, procs);
 				mpiNode.startListening();
 			//	System.out.println("Results on Slave");
@@ -38,5 +39,8 @@ public class TestParallelKMeansDNA {
 			System.out.println("MPI Exception");
 			e.printStackTrace();
 		}
+		long time2 = System.currentTimeMillis();
+		long time = time2 - time1;
+		System.out.println("Time:"+ time);
 	}
 }

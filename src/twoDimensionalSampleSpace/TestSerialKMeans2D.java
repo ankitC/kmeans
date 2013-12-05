@@ -9,7 +9,7 @@ import dataGenerators.TwoDimensionalDataGenerator;
 
 public class TestSerialKMeans2D implements KMeansTestInterface {
 
-	private int sampleLength = 100000;
+	private int sampleLength = 1000000;
 
 	public ArrayList<DataPoint> generateData(int sampleLength) {
 		return TwoDimensionalDataGenerator.generateInt(sampleLength);
