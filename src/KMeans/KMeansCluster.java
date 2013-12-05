@@ -12,6 +12,7 @@ public class KMeansCluster implements Cluster {
 	private ArrayList<DataPoint> dataset = new ArrayList<DataPoint>();
 	private DataPoint centroid;
 	private Average clusterAvg;
+	private int size = 0;
 
 	public KMeansCluster(DataPoint centroid,Average avgerage){
 		this.centroid = centroid;
@@ -22,15 +23,25 @@ public class KMeansCluster implements Cluster {
 		this.dataset = dataset;
 		this.centroid = centroid;
 		this.clusterAvg = runningAvg;
+		this.size = dataset.size();
 	}
 
 	public void addDataPoint(DataPoint dataPt) {
 		dataset.add(dataPt);
 		clusterAvg.addDataPoint(dataPt);
+		this.size++;
 	}
 
 	public DataPoint  getCentroid() {
 		return centroid;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
 	}
 
 	public DataPoint getAverage() {
@@ -43,7 +54,7 @@ public class KMeansCluster implements Cluster {
 
 	public String toString() {
 		String result = "Centered around: " + centroid.toString() + "\n";
-		result+="Cluster Size:"+dataset.size()+"\n";
+		result+="Cluster Size:"+size+"\n";
 		DataPoint  avg =(DataPoint) clusterAvg.getAverage();
 		String avgString = "null";
 		if(avg != null) {avgString = avg.toString();}
@@ -56,10 +67,4 @@ public class KMeansCluster implements Cluster {
 		 */
 		return result;
 	}
-
-	public void mergeWith(KMeansCluster kMeansCluster) {
-		
-		
-	}
-
 }

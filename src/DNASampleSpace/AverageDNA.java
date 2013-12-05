@@ -91,13 +91,12 @@ public class AverageDNA implements Average {
 	public void combineAverages(Average average) {
 
 		AverageDNA childAverage = (AverageDNA)average;
-		for(int i = 0; i < childAverage.getDatasize(); i++){
+		for(int i = 0; i < datasize; i++){
 			ACount[i] += childAverage.getCount("A")[i];
 			CCount[i] += childAverage.getCount("C")[i];
 			GCount[i] += childAverage.getCount("G")[i];
 			TCount[i] += childAverage.getCount("T")[i];
 		}
-	//	this.datasize +=  ((AverageDNA) average).getDatasize();
 	}
 
 	public int getDatasize() {
@@ -121,4 +120,5 @@ public class AverageDNA implements Average {
 			return null;
 		}
 	}
+
 }
