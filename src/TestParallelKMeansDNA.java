@@ -1,4 +1,4 @@
-package DNASampleSpace;
+
 import interfaces4KMeans.DataPoint;
 
 import java.util.ArrayList;
@@ -23,8 +23,8 @@ public class TestParallelKMeansDNA {
 			//	System.out.println("Initializing Master");
 				ArrayList<DataPoint> data = new ArrayList<DataPoint>();
 
-				data = DNADataGenerator.generateDNA(1000000, 10);
-				KMeansMPIMaster mpiNode = new KMeansMPIMaster(data,  DNASampleSpace.AverageDNA.class, 10, 0, masterRank, procs);
+				data = DNADataGenerator.generateDNA(1000000, 20);
+				KMeansMPIMaster mpiNode = new KMeansMPIMaster(data,  DNASampleSpace.AverageDNA.class, 100, 0, masterRank, procs);
 	//			System.out.println(mpiNode.toString());
 				long time2 = System.currentTimeMillis();
 				long time = time2 - time1;

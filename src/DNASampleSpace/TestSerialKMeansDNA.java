@@ -11,8 +11,8 @@ import interfaces4KMeans.KMeansTestInterface;
 
 public class TestSerialKMeansDNA implements KMeansTestInterface{
 
-	private int sampleLength = 10000;
-	private int elementsPerStrand = 10;
+	private int sampleLength = 100000;
+	private int elementsPerStrand = 20;
 
 	public ArrayList<DataPoint> generateData(int numberOfStrands) {
 		return DNADataGenerator.generateDNA(numberOfStrands, this.elementsPerStrand);
@@ -27,7 +27,7 @@ public class TestSerialKMeansDNA implements KMeansTestInterface{
 		//for(int i = 0; i< data.size(); i++)
 		//	System.out.println(data.get(i).toString());
 
-		SerialKMeans kMeansResults = new SerialKMeans(data, AverageDNA.class, 10, 0);
+		SerialKMeans kMeansResults = new SerialKMeans(data, AverageDNA.class, 100, 0);
 	
 		/* Output Commented out */
 		//	System.out.println(kMeansResults.toString());
