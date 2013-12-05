@@ -19,7 +19,7 @@ public class TestSerialKMeans2D implements KMeansTestInterface {
 
 		ArrayList <DataPoint>data =generateData(this.sampleLength);
 		SerialKMeans kMeansResults = new SerialKMeans(data, Average2D.class, 12, 0.001);
-		System.out.println(kMeansResults.toString());
+	//	System.out.println(kMeansResults.toString());
 
 	}
 

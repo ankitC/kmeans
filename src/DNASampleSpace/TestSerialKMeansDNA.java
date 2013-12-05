@@ -28,7 +28,9 @@ public class TestSerialKMeansDNA implements KMeansTestInterface{
 		//	System.out.println(data.get(i).toString());
 
 		SerialKMeans kMeansResults = new SerialKMeans(data, AverageDNA.class, 5, 0);
-		System.out.println(kMeansResults.toString());
+	
+		/* Output Commented out */
+		//	System.out.println(kMeansResults.toString());
 
 	}
 
