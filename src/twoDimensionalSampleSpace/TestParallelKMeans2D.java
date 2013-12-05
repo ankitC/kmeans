@@ -1,3 +1,4 @@
+package twoDimensionalSampleSpace;
 import interfaces4KMeans.DataPoint;
 
 import java.util.ArrayList;
@@ -8,7 +9,9 @@ import KMeans.Parallel.KMeansMPISlave;
 import dataGenerators.DNADataGenerator;
 
 
-public class KMeansParallel {
+public class TestParallelKMeans2D {
+	
+	static int sampleLength = 10000;
 
 	public static void main(String[] args) throws Throwable {
 		try {
@@ -21,8 +24,8 @@ public class KMeansParallel {
 				System.out.println("Initializing Master");
 				ArrayList<DataPoint> data = new ArrayList<DataPoint>();
 
-				data = DNADataGenerator.generateDNA(1000, 30);
-				KMeansMPIMaster mpiNode = new KMeansMPIMaster(data,  DNASampleSpace.AverageDNA.class, 10, 0, masterRank, procs);
+				data = dataGenerators.TwoDimensionalDataGenerator.generateInt(sampleLength);
+				KMeansMPIMaster mpiNode = new KMeansMPIMaster(data,  twoDimensionalSampleSpace.Average2D.class, 10, 0, masterRank, procs);
 				System.out.println(mpiNode.toString());
 			} else {
 				System.out.println("Started slave " + rank);
