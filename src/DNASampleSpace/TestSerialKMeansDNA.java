@@ -13,7 +13,7 @@ import interfaces4KMeans.KMeansTestInterface;
 public class TestSerialKMeansDNA implements KMeansTestInterface{
 
 	/* Dataset parameters */
-	private int sampleLength = 100000;
+	private int sampleLength = 1000000;
 	private int elementsPerStrand = 20;
 
 	public ArrayList<DataPoint> generateData(int numberOfStrands) {
