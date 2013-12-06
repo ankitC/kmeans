@@ -1,9 +1,1 @@
-Hello!
-
-To compile our project, do the following:
-
-$> ./compile.sh
-
-To run a particular test program, do the following:
-
-$> ./run.sh <# of processes (1 if serial)> <name of test program> <args to test program if any>
+See "How to Run" in report.pdf
