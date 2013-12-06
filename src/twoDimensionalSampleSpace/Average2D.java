@@ -24,6 +24,7 @@ public class Average2D implements Average{
 		return new DataPoint2D(xTotal/size, yTotal/size);
 	}
 
+	/* Adding the datapoint to the total and size */
 	public void addDataPoint(DataPoint data) {
 		xTotal += ((DataPoint2D) data).getX();
 		yTotal += ((DataPoint2D) data).getY();
@@ -42,6 +43,7 @@ public class Average2D implements Average{
 		return yTotal;
 	}
 
+	/* Combining the averages of two clusters */
 	public void combineAverages(Average average) {
 			this.xTotal += ((Average2D) average).getTotalX();
 			this.yTotal += ((Average2D) average).getTotalY();

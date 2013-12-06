@@ -11,7 +11,7 @@ public class SerialKMeans {
 
 	private ArrayList<DataPoint> dataset;
 	private ArrayList<KMeansCluster> clusters;
-	private ArrayList<Double> meanCentroidDeviation;	
+	private ArrayList<Double> setTolerance;	
 	private Class<?> avgerageImplementation;
 	private int iterations;
 
@@ -21,17 +21,17 @@ public class SerialKMeans {
 		this.avgerageImplementation = sampleAvgerageClass;
 
 		if(numberOfClasses<= 0) {
-			System.out.println("Cannot have " +numberOfClasses +" classes, min : 1");
+			System.out.println("Cannot have " +numberOfClasses +" classes, minimum : 1");
 			System.exit(1);
 		}
 
 		this.avgerageImplementation = sampleAvgerageClass;
 
 		this.clusters = new ArrayList<KMeansCluster>();
-		this.meanCentroidDeviation = new ArrayList<Double>();
+		this.setTolerance = new ArrayList<Double>();
 
 		Random rgenerator = new Random();
-
+		/* Choosing the centroids randomly */
 		for(int i = 0; i < numberOfClasses; i++) {
 			DataPoint centroid = dataset.get(rgenerator.nextInt(dataset.size()));
 			KMeansCluster cluster = new KMeansCluster((DataPoint) centroid,  (Average)sampleAvgerageClass.getConstructor().newInstance());
@@ -41,7 +41,7 @@ public class SerialKMeans {
 		/* Initial Clustering */
 		this.clusterDataset();
 
-		this.iterations = 0;
+		this.iterations = 1;
 
 		while(!this.isInTolerenceLimits(tolerance)) {
 			this.findNewClusters();
@@ -81,7 +81,7 @@ public class SerialKMeans {
 
 	public void findNewClusters() throws Exception{
 		ArrayList<KMeansCluster> newClusters = new ArrayList<KMeansCluster>();
-		meanCentroidDeviation = new ArrayList<Double>();
+		setTolerance = new ArrayList<Double>();
 
 		for(int c = 0; c < clusters.size(); c++) {
 
@@ -89,7 +89,7 @@ public class SerialKMeans {
 			DataPoint avg = cluster.getAverage();
 
 			if(avg != null) {
-				meanCentroidDeviation.add(avg.distanceTo(cluster.getCentroid()));
+				setTolerance.add(avg.distanceTo(cluster.getCentroid()));
 				Average newAverage = (Average) avgerageImplementation.getConstructor().newInstance();
 				newClusters.add(new KMeansCluster(avg, newAverage));
 			}
@@ -100,12 +100,12 @@ public class SerialKMeans {
 	/* Check if the clustering is within the tolerance limits */
 	private boolean isInTolerenceLimits(double tolerance) {
 
-		for(int i = 0; i < meanCentroidDeviation.size(); i++) {
-			if(meanCentroidDeviation.get(i) > tolerance) {
+		for(int i = 0; i < setTolerance.size(); i++) {
+			if(setTolerance.get(i) > tolerance) {
 				return false;
 			}
 		}
-		return meanCentroidDeviation.size() == clusters.size();
+		return setTolerance.size() == clusters.size();
 	}
 
 	/* Print information about the cluster */

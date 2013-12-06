@@ -6,6 +6,8 @@ import interfaces4KMeans.DataPoint;
 
 import java.util.ArrayList;
 
+/* Defining the class that represents a cluster for KMeans */
+/* It has the dataset points pertaining to the cluster, the average of that cluster and the size of the cluster */
 public class KMeansCluster implements Cluster {
 
 	private static final long serialVersionUID = 2518689765641386585L;

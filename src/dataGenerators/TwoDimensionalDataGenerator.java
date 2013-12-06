@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import twoDimensionalSampleSpace.DataPoint2D;
 
+/* Generate the data in 2 Dimensions */
 public class TwoDimensionalDataGenerator {
 
 	public static ArrayList<DataPoint> generateInt(int length) {
@@ -15,7 +16,6 @@ public class TwoDimensionalDataGenerator {
 		for (int i = 0; i < length; i++) {
 			sampleData.add( new DataPoint2D(intGenerator.nextInt() % length, intGenerator.nextInt()%length));
 		}
-
 		return sampleData;
 	}
 

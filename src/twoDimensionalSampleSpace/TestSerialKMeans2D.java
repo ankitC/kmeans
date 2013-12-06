@@ -7,9 +7,10 @@ import java.util.ArrayList;
 import KMeans.Serial.SerialKMeans;
 import dataGenerators.TwoDimensionalDataGenerator;
 
+/* Testing the serial KMeans for the 2D data */
 public class TestSerialKMeans2D implements KMeansTestInterface {
 
-	private int sampleLength = 1000000;
+	private int sampleLength = 100000;
 
 	public ArrayList<DataPoint> generateData(int sampleLength) {
 		return TwoDimensionalDataGenerator.generateInt(sampleLength);
@@ -18,9 +19,8 @@ public class TestSerialKMeans2D implements KMeansTestInterface {
 	public void test() throws Throwable {
 
 		ArrayList <DataPoint>data =generateData(this.sampleLength);
-		SerialKMeans kMeansResults = new SerialKMeans(data, Average2D.class, 10, 0);
+		SerialKMeans kMeansResults = new SerialKMeans(data, Average2D.class, 100, 0);
 		//	System.out.println(kMeansResults.toString());
-
 	}
 
 	public static void main(String[] args) throws Throwable {

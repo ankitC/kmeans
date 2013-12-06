@@ -3,35 +3,37 @@ package DNASampleSpace;
 import interfaces4KMeans.Average;
 import interfaces4KMeans.DataPoint;
 
+/* Class defining the Average of the DNA dataset in the cluster */
 public class AverageDNA implements Average {
 
 	private static final long serialVersionUID = 757454833475406133L;
-	private int datasize = -1; 
+	private int strandLength = -1; 
 	private int[] ACount;
 	private int[] CCount;
 	private int[] GCount;
 	private int[] TCount;
 
 	public  AverageDNA(){
-		this.datasize = -1;
+		this.strandLength = -1;
 		this.ACount = null;
 		this.CCount = null;
 		this.GCount = null;
 		this.TCount = null;
 	}
-
+	/* The average is defined as the element that occurs at a position for the max number of times */
 	public void addDataPoint(DataPoint dataPt) {
 
 		String[] datapoint = ((DataPointDNA)dataPt).getDatapoint();
 
-		if(datasize < 0){		
+		/* Set the strandLength when the first datapoint is added to the cluster */
+		if(strandLength < 0){		
 			//	System.out.println("DataPoint Length:"+ datapoint.length);
-			this.datasize = datapoint.length;
+			this.strandLength = datapoint.length;
 
-			ACount = new int[datasize];
-			CCount = new int[datasize];
-			GCount = new int[datasize];
-			TCount = new int[datasize];
+			ACount = new int[strandLength];
+			CCount = new int[strandLength];
+			GCount = new int[strandLength];
+			TCount = new int[strandLength];
 		}
 
 		for(int i = 0; i < datapoint.length; i++){
@@ -50,19 +52,22 @@ public class AverageDNA implements Average {
 				System.exit(1);
 			}
 		}
+		/* Debug statements */
 		//	System.out.println("Datapoint:" +dataPt.toString());
 		//	System.out.println("ACount:"+ACount.length+"CCount:"+CCount.length+"GCount:"+GCount.length+"TCount:"+TCount.length);
 
 	}
 
+	/* Average is defined as the mean of the cluster. 
+	 * It gives back a strand with each element at a position being the element 
+	 * which occurs most number of times at that position */
 	public DataPoint getAverage() {
-
-		if(datasize <= 0){
+		if(strandLength <= 0){
 			return null;
 		}
 
-		String[] result = new String[datasize];
-		for(int i = 0; i < datasize; i++){
+		String[] result = new String[strandLength];
+		for(int i = 0; i < strandLength; i++){
 			int A = ACount[i];
 			int C = CCount[i];
 			int G = GCount[i];
@@ -88,33 +93,34 @@ public class AverageDNA implements Average {
 		return returnResult;
 	}
 
+	/* Used only when using Parallel KMeans. It combines the 2 clusters */
 	public void combineAverages(Average average) {
 
 		AverageDNA childAverage = (AverageDNA)average;
-		for(int i = 0; i < datasize; i++){
-			ACount[i] += childAverage.getCount("A")[i];
-			CCount[i] += childAverage.getCount("C")[i];
-			GCount[i] += childAverage.getCount("G")[i];
-			TCount[i] += childAverage.getCount("T")[i];
+		for(int i = 0; i < strandLength; i++){
+			ACount[i] += childAverage.getNumberOfOccurances("A")[i];
+			CCount[i] += childAverage.getNumberOfOccurances("C")[i];
+			GCount[i] += childAverage.getNumberOfOccurances("G")[i];
+			TCount[i] += childAverage.getNumberOfOccurances("T")[i];
 		}
 	}
 
-	public int getDatasize() {
-		return datasize;
+	public int getStrandLength() {
+		return strandLength;
 	}
 
-	public void setDatasize(int datasize) {
-		this.datasize = datasize;
+	public void setStrandLength(int strandlength) {
+		this.strandLength = strandlength;
 	}
 
-	public int[] getCount(String base){
-		if(base.equals("A")){
+	public int[] getNumberOfOccurances(String element){
+		if(element.equals("A")){
 			return ACount;
-		} else if(base.equals("C")){
+		} else if(element.equals("C")){
 			return CCount;
-		} else if(base.equals("G")){
+		} else if(element.equals("G")){
 			return GCount;
-		} else if(base.equals("T")){
+		} else if(element.equals("T")){
 			return TCount; 
 		} else {
 			return null;

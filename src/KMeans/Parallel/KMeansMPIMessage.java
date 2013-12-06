@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import KMeans.KMeansCluster;
 
+/* Class describing the mesages to be exchanged between the workers */
 public class KMeansMPIMessage implements Serializable {
 
 	private static final long serialVersionUID = -3323000008501613199L;

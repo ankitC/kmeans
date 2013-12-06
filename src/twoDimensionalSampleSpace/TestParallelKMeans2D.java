@@ -8,7 +8,7 @@ import KMeans.Parallel.KMeansMPISlave;
 
 import dataGenerators.DNADataGenerator;
 
-
+/* Testing the timing of the KMeans in parallel for 2D */
 public class TestParallelKMeans2D {
 
 	static int sampleLength = 100000;
@@ -24,16 +24,18 @@ public class TestParallelKMeans2D {
 			if(rank == masterRank) {
 				//			System.out.println("Initializing Master");
 				ArrayList<DataPoint> data = new ArrayList<DataPoint>();
-
+				/* Generating the 2D data */
 				data = dataGenerators.TwoDimensionalDataGenerator.generateInt(sampleLength);
-				KMeansMPIMaster mpiNode = new KMeansMPIMaster(data,  twoDimensionalSampleSpace.Average2D.class, 10, 0, masterRank, procs);
-				System.out.println(mpiNode.toString());
+				/* Clustering the 2D Data */
+				KMeansMPIMaster mpiNode = new KMeansMPIMaster(data,  twoDimensionalSampleSpace.Average2D.class, 100, 0, masterRank, procs);
+				long time2 = System.currentTimeMillis();
+				long time = time2 - time1;
+				System.out.println("Time:"+ time);
+				//System.out.println(mpiNode.toString());
 			} else {
 				//	System.out.println("Started slave " + rank);
 				KMeansMPISlave mpiNode= new KMeansMPISlave(rank, masterRank, procs);
-				mpiNode.startListening();
-				//	System.out.println("Results on Slave");
-				//	mpiNode.toString();
+				mpiNode.startSlave();
 			}
 
 			MPI.Finalize();
@@ -41,9 +43,7 @@ public class TestParallelKMeans2D {
 			System.out.println("MPI Exception");
 			e.printStackTrace();
 		}
-		long time2 = System.currentTimeMillis();
-		long time = time2 - time1;
-		System.out.println("Time:"+ time);
+
 	}
 }
 

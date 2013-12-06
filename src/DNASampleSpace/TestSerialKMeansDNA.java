@@ -9,8 +9,10 @@ import dataGenerators.DNADataGenerator;
 import interfaces4KMeans.DataPoint;
 import interfaces4KMeans.KMeansTestInterface;
 
+/* Simple Test program to test the Time for Serial Execution of the program */
 public class TestSerialKMeansDNA implements KMeansTestInterface{
 
+	/* Dataset parameters */
 	private int sampleLength = 100000;
 	private int elementsPerStrand = 20;
 
@@ -21,14 +23,8 @@ public class TestSerialKMeansDNA implements KMeansTestInterface{
 	public void test() throws Throwable {
 
 		ArrayList <DataPoint>data =generateData(this.sampleLength);
-//		System.out.println("Finished Generating Data");
-		//	System.out.println(data.size());
-
-		//for(int i = 0; i< data.size(); i++)
-		//	System.out.println(data.get(i).toString());
-
 		SerialKMeans kMeansResults = new SerialKMeans(data, AverageDNA.class, 100, 0);
-	
+
 		/* Output Commented out */
 		//	System.out.println(kMeansResults.toString());
 
@@ -41,7 +37,7 @@ public class TestSerialKMeansDNA implements KMeansTestInterface{
 		long time2 = System.currentTimeMillis();
 		long time = time2 - time1;
 		System.out.println("Time:"+ time);
-		
+
 	}
 
 }

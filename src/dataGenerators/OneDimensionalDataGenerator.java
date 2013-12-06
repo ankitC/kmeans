@@ -7,7 +7,7 @@ import java.util.Random;
 
 import oneDimensionalSampleSpace.DataPoint1D;
 
-
+/* Generate the 1D data */
 public class OneDimensionalDataGenerator {
 
 	public static ArrayList<DataPoint> generateInt(int length){

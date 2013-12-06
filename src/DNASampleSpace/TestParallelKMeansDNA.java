@@ -1,3 +1,4 @@
+package DNASampleSpace;
 
 import interfaces4KMeans.DataPoint;
 
@@ -14,34 +15,34 @@ public class TestParallelKMeansDNA {
 	public static void main(String[] args) throws Throwable {
 		long time1 = System.currentTimeMillis();
 		try {
+			/* Starting and setting up the MPI env */
 			MPI.Init(args);
 			int rank = MPI.COMM_WORLD.Rank();
 			int procs = MPI.COMM_WORLD.Size();
 			int masterRank = 0;
 
 			if(rank == masterRank) {
-			//	System.out.println("Initializing Master");
+				//	System.out.println("Initializing Master");
 				ArrayList<DataPoint> data = new ArrayList<DataPoint>();
-
+				/* Generate the data */
 				data = DNADataGenerator.generateDNA(1000000, 20);
 				KMeansMPIMaster mpiNode = new KMeansMPIMaster(data,  DNASampleSpace.AverageDNA.class, 100, 0, masterRank, procs);
-	//			System.out.println(mpiNode.toString());
+			
 				long time2 = System.currentTimeMillis();
 				long time = time2 - time1;
 				System.out.println("Time:"+ time);
 			} else {
-	//			System.out.println("Started slave " + rank);
+
 				KMeansMPISlave mpiNode= new KMeansMPISlave(rank, masterRank, procs);
-				mpiNode.startListening();
-			//	System.out.println("Results on Slave");
-			//	mpiNode.toString();
+				mpiNode.startSlave();
 			}
 
+			/* Finish the execution and we are done */
 			MPI.Finalize();
 		} catch(MPIException e) {
 			System.out.println("MPI Exception");
 			e.printStackTrace();
 		}
-	
+
 	}
 }

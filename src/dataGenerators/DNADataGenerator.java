@@ -7,7 +7,7 @@ import java.util.Random;
 
 import DNASampleSpace.DataPointDNA;
 
-
+/* Generate DNAs as per specifications */
 public class DNADataGenerator {
 
 	private static String element[] = {"A", "C", "G", "T"};
@@ -25,11 +25,10 @@ public class DNADataGenerator {
 			}
 
 			DataPointDNA temp = new DataPointDNA(dnaStrand);
-		//	System.out.println(temp.toString());
+			/* Return the outputs to the program */
+			//	System.out.println(temp.toString());
 			returnCollection.add(temp);
 		}
-
-
 		return returnCollection;
 	}
 }
